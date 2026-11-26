@@ -1,0 +1,406 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,geometry,graphicx,xcolor,hyperref}
+\geometry{a4paper,top=22mm,bottom=23mm,left=25mm,right=25mm}
+\definecolor{ink}{HTML}{183A49}
+\definecolor{accent}{HTML}{086D69}
+\hypersetup{colorlinks=true,urlcolor=accent,citecolor=accent,linkcolor=accent,pdftitle={Hitting and return times for non-backtracking random walks}}
+\setlength{\parskip}{3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\E}{\mathbb E}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Kh}{K_{\mathrm{hit}}}
+\newcommand{\Kt}{K_{\mathrm{tr}}}
+\newcommand{\Ks}{K_{\mathrm{SR}}}
+\newcommand{\Var}{\operatorname{Var}}
+\title{\textcolor{ink}{Hitting and return times for\texorpdfstring{\\}{ }non-backtracking random walks}}
+\date{Research draft \enspace$\cdot$\enspace 26 November 2026}
+\author{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For finite connected simple undirected graphs with minimum degree at least two, forbidding immediate backtracking strictly reduces the expected time to reach any fixed target from a stationary start. A prescribed starting vertex can reverse this comparison by an unbounded factor. For the two vertex Kemeny constants of Breen, Kempton, Knudson and Shumway, we express their difference as a sum of positive quadratic forms in conditional return times. A weighted spanning-tree criterion characterizes the graphs with equality. The formula bounds the gap by twice the number of vertices. A family of two cycles meeting at one vertex realizes linear growth.
+\end{abstract}
+
+\section{Mean hitting times and two Kemeny constants}
+We use the second-order hitting-time convention of \cite{fasino}. Let $G$ have $n$ vertices, $m$ edges and degrees $d_i\ge2$. A walk started at $i$ chooses its first neighbor uniformly. At subsequent steps the simple random walk chooses any neighbor uniformly. The non-backtracking walk chooses uniformly among all neighbors except the one it just left. Write $T_v=\min\{t\ge0:X_t=v\}$ and $T_v^+=\min\{t\ge1:X_t=v\}$. The stationary vertex probabilities are $\pi_i=d_i/(2m)$. Define
+\[
+ \Kh=\sum_v\pi_v\E^{\rm NB}_\pi T_v,\qquad
+ \Ks=\sum_v\pi_v\E^{\rm SR}_\pi T_v .
+\]
+Breen et al.\ also defined a constant $\Kt$ from a projected fundamental matrix \cite[Definition~3.6]{breen}. In Section~5 of their preprint they asked when $\Kt=\Kh$ (Question~2), how large the gap can be (Question~3), and whether $\Kh<\Ks$ (Question~4). Their Corollary~3.14 proves equality when mean returns to every vertex are independent of the first direction. We prove the converse, the chain of inequalities
+\[
+                  \Kt\le\Kh<\Ks,
+\]
+and a gap bound of optimal order. For their Question~1, we give a spanning-tree test for local uniformity and an infinite family without edge transitivity. The trace comparison assumes that the graph is not a single cycle, on which the directed-edge inverse in Definition~3.6 is singular. The hitting-time comparison includes cycles.
+\begin{center}
+{\setlength{\unitlength}{1mm}\begin{picture}(93,32)(-46,-16)
+\color{ink}\linethickness{0.52pt}
+\qbezier(0.00,0.00)(-1.52,4.18)(-3.04,8.36)
+\qbezier(-3.04,8.36)(-6.89,10.58)(-10.74,12.80)
+\qbezier(-10.74,12.80)(-15.12,12.03)(-19.50,11.26)
+\qbezier(-19.50,11.26)(-22.36,7.85)(-25.22,4.45)
+\qbezier(-25.22,4.45)(-25.22,0.00)(-25.22,-4.45)
+\qbezier(-25.22,-4.45)(-22.36,-7.85)(-19.50,-11.26)
+\qbezier(-19.50,-11.26)(-15.12,-12.03)(-10.74,-12.80)
+\qbezier(-10.74,-12.80)(-6.89,-10.58)(-3.04,-8.36)
+\qbezier(-3.04,-8.36)(-1.52,-4.18)(0.00,0.00)
+\qbezier(-0.00,0.00)(1.52,4.18)(3.04,8.36)
+\qbezier(3.04,8.36)(6.89,10.58)(10.74,12.80)
+\qbezier(10.74,12.80)(15.12,12.03)(19.50,11.26)
+\qbezier(19.50,11.26)(22.36,7.85)(25.22,4.45)
+\qbezier(25.22,4.45)(25.22,0.00)(25.22,-4.45)
+\qbezier(25.22,-4.45)(22.36,-7.85)(19.50,-11.26)
+\qbezier(19.50,-11.26)(15.12,-12.03)(10.74,-12.80)
+\qbezier(10.74,-12.80)(6.89,-10.58)(3.04,-8.36)
+\qbezier(3.04,-8.36)(1.52,-4.18)(-0.00,0.00)
+\put(-19.50,11.26){\circle*{1.3}}
+\put(-25.22,-4.45){\circle*{1.3}}
+\put(0.00,0.00){\circle*{1.3}}
+\put(-3.04,-8.36){\circle*{1.3}}
+\put(3.04,-8.36){\circle*{1.3}}
+\put(-3.04,8.36){\circle*{1.3}}
+\put(-25.22,4.45){\circle*{1.3}}
+\put(19.50,-11.26){\circle*{1.3}}
+\put(10.74,-12.80){\circle*{1.3}}
+\put(-10.74,-12.80){\circle*{1.3}}
+\put(-10.74,12.80){\circle*{1.3}}
+\put(-19.50,-11.26){\circle*{1.3}}
+\put(10.74,12.80){\circle*{1.3}}
+\put(19.50,11.26){\circle*{1.3}}
+\put(25.22,4.45){\circle*{1.3}}
+\put(25.22,-4.45){\circle*{1.3}}
+\put(3.04,8.36){\circle*{1.3}}
+\put(0.00,-3.30){\makebox(0,0){\small\color{accent}$w$}}
+\put(-2.70,11.40){\makebox(0,0){\small\color{accent}$v$}}
+\put(-11.70,15.20){\makebox(0,0){\small\color{accent}$x$}}
+\end{picture}}
+\par\small Two nine-cycles with a shared vertex $w$. From $x$ to $v$ the simple walk takes\\
+$10$ steps on average, and the non-backtracking walk takes $61/6$.
+\end{center}
+
+\clearpage
+\section{The gap as a sum of local return-time variations}
+Use the directed edge $(X_t,X_{t+1})$ as the state at time $t$. Its tail is the current vertex and its stationary distribution $\eta$ is uniform on the $2m$ arcs. Write $W=\one\eta^\top$ and let $R$ reverse each arc. At vertex $i$, index the outgoing arcs by their other endpoint. With $J$ the all-ones matrix of the appropriate size, the symmetric block $B_i=(J-I)/(d_i-1)$ maps the incoming neighbor to the distribution of the next neighbor. The arc transition matrix is $P=RB$ for block diagonal $B$. If $f_v$ indicates arcs with tail $v$, Definition~3.6 of \cite{breen} gives
+\[
+ Z=(I-P+W)^{-1},\qquad z_{vv}=d_v^{-1} f_v^\top Z f_v,\qquad
+ \Kt=\sum_v z_{vv}-1.
+\]
+For a connected noncycle in this class $P$ is irreducible. Indeed, delete the edge $ij$ of an arc $i\to j$. The component of $j$ contains a cycle. For a bridge this follows because only $j$ can have degree below two in that component. For a nonbridge it follows because the original noncycle has at least two independent cycles. A path from $j$ to a nearest such cycle, one lap, and the reverse path give a legal detour before taking $j\to i$. Thus all immediate reversals in an ordinary route can be replaced. Periodicity causes no difficulty for the finite inverse.
+
+Fix $v$ and abbreviate $d=d_v$, $c=1/(d-1)$, $\mu=1/\pi_v$.
+Starting along $v\to a$, define $r_a=\E[T_v^+\mid X_0=v,X_1=a]$, and let $H_{ab}$ be the probability that the first return arrives along $b\to v$. Reversing a first-return path interchanges $a,b$ and preserves its probability, the product of $(d_i-1)^{-1}$ over interior visits. Thus $H$ is symmetric and stochastic. Write $h=r-\mu\one$.
+
+\begin{theorem}\label{th:local}
+On a connected noncycle in the specified class, set $\Delta_v=\pi_v\E_\pi^{\rm NB}T_v-(z_{vv}-\pi_v)$. Then
+\[
+ \Delta_v=\frac{c}{d\mu^2}\,h^\top\big[(I+cH)|_{\one^\perp}\big]^{-1}h .
+ \tag{1}
+\]
+In particular $\Kh-\Kt=\sum_v\Delta_v\ge0$, with equality exactly when $r_a$ is independent of $a$ at every $v$.
+\end{theorem}
+
+\begin{proof}
+Consider two arc chains. Chain~1 is the original. Chain~0 chooses a fresh uniform neighbor whenever it arrives at $v$. Both have stationary law $\eta$. Put $B_{0,v}=J/d$, $B_{1,v}=(J-I)/(d-1)$ and use the original blocks elsewhere. Both are irreducible since the reset adds possible transitions. Let $P_j=RB_j$, $Z_j=(I-P_j+W)^{-1}$, $f=f_v$, $x_j=Z_j f$, and let $A$ be the $d$ arcs with tail $v$. The Poisson equation and its normalization are
+\[
+ (I-P_j)x_j=f-\pi_v\one,\qquad \eta^\top x_j=\pi_v .
+ \tag{2}
+\]
+From outside $A$, stop (2) at the first visit to $A$ in chain~0. The expected terminal potential is the average $\bar x_{0,A}$ because the departure from $v$ is uniform. The path up to the hit has its original law. Hence $x_0(e)=\bar x_{0,A}-\pi_v\E_e T_v$ for $e\notin A$. Averaging over all arcs, including the uniform contribution from $A$, gives
+\[
+                \bar x_{0,A}-\pi_v=\pi_v\E^{\rm NB}_\pi T_v.
+ \tag{3}
+\]
+
+For a departure in $A$, stop (2) at the next positive visit to $A$. Between departures the sum of $f$ is exactly one. The kernel taking one departure to the next is $HB_{j,v}$, while $H$ and $r$ are identical for the two chains. Thus, with $x_{j,A}$ the restriction to $A$,
+\[
+       (I-HB_{j,v})x_{j,A}=\one-\pi_v r .
+\]
+Averaging gives $\bar r=1/\pi_v=\mu$, since the kernel is doubly stochastic. Let $Q=I-J/d$ and $y_j=Qx_{j,A}$. On $\one^\perp$, $B_{0,v}$ is zero and $B_{1,v}$ acts by $-cI$. Consequently
+\[
+ y_0=-\pi_v h,\qquad
+ y_1=-\pi_v\big[(I+cH)|_{\one^\perp}\big]^{-1}h .
+ \tag{4}
+\]
+The inverse here is positive definite. For $d>2$ this follows from $c<1$ and the spectrum of $H$ lying in $[-1,1]$. For $d=2$, the only possible obstacle would give eigenvalue $1$ on $\one^\perp$ for $HB_{1,v}$. The chain of visits to a nonempty subset of a finite irreducible chain is itself irreducible, so its eigenvalue $1$ is simple.
+
+To compare the two potentials, $Z_jR$ is symmetric because $R^2=I$, $RW=WR=W$, and $B_j$ and $R$ are symmetric. Also $B_j f=f$, so $Z_jRf=Z_jP_jf=(Z_j-I+W)f$. Let $\widetilde Q$ act as $Q$ on $A$ and as zero on the other arcs. The resolvent identity and $B_0-B_1=c\widetilde Q$ imply
+\[
+ f^\top (Z_0-Z_1)f
+ =c f^\top Z_0 R\widetilde Q Z_1 f
+ =c\, y_0^\top y_1 .
+\]
+In the last equality $-f+Wf$ vanishes after centering on $A$. Divide by $d$, use (3) and (4), and observe that $d^{-1} f^\top Z_1 f=z_{vv}$. This proves (1). Each local term is nonnegative and is zero precisely when $h=0$, proving the equality characterization.
+\end{proof}
+
+Equation (1) proves the inequality proposed in \cite[Eq.~(10)]{breen} and resolves the converse in Question~2. For example, the diamond graph ($K_4$ with one edge deleted) has $\Kt=17/10$ and $\Kh=128/75$, a gap of $1/150$. The two values for $K_4$ itself are both $7/4$. These numbers also follow by solving the original hitting-time equations and independently inverting the arc matrix.
+
+
+\section{A grounded electrical network for each target}
+
+Fix a target $v$. Write $g_i$ and $s_i$ for the mean times to hit $v$
+from $i$ for the non-backtracking and simple random walks, respectively,
+with $g_v=s_v=0$. The first step of either walk is uniform among the
+neighbors of $i$.
+
+\begin{theorem}
+On every finite connected simple graph of minimum degree at least two,
+\[
+  \sum_i\pi_i g_i < \sum_i\pi_i s_i
+  \qquad\text{for every }v .
+\]
+Consequently the vertex first-hitting Kemeny constant for the
+non-backtracking walk is strictly smaller than the simple-walk
+Kemeny constant, answering Question~4.
+\end{theorem}
+
+\begin{proof}
+For each $i\ne v$ put $b_i=d_i/(d_i-1)$ and denote by $t_{ij}$ the
+conditional hitting time given that the first step is $i\to j$.
+Then $g_i=d_i^{-1}\sum_{j\sim i}t_{ij}$, $t_{iv}=1$, and on edges
+whose endpoints differ from $v$ the first-step equations give
+\[
+ t_{ij}=1+b_jg_j-(b_j-1)t_{ji}.
+\]
+Orient a current by setting $F_{ij}=1+b_i(g_i-t_{ij})$ for $i\ne v$.
+On internal edges the first-step equations give
+$F_{ij}=t_{ji}-t_{ij}=-F_{ji}$. Set $F_{vi}=-F_{iv}$ at the target.
+The divergence of $F$ at $i\ne v$ equals $d_i$.
+
+Set $a_i=1/d_i$ for $i\ne v$, $a_v=0$, and introduce potentials
+$u_i=g_i-a_i$ and edge resistances $R_{ij}=1-a_i-a_j\ge0$.
+On internal edges, substituting
+$t_{ij}=g_i+(1-F_{ij})/b_i$ and
+$t_{ji}=g_j+(1+F_{ij})/b_j$ into $F_{ij}=t_{ji}-t_{ij}$ gives
+$u_i-u_j=R_{ij}F_{ij}$. On an edge incident to $v$, the same identity
+follows from $t_{iv}=1$.
+
+The simple-walk current $J_{ij}=s_i-s_j$ has the same divergence by
+the simple-walk first-step equation. Sum over each unoriented edge once
+with either orientation. Summation by parts yields
+\[
+ \sum_{ij}R_{ij}F_{ij}(J_{ij}-F_{ij})
+ =\sum_i u_i\operatorname{div}(J-F)_i=0.
+\]
+Thus $\sum R_{ij}F_{ij}^{2}\le\sum R_{ij}J_{ij}^{2}$, also when
+some resistances vanish. A second summation by parts gives
+$\sum J_{ij}^{2}=\sum_{i\ne v}d_i s_i$ and
+$\sum R_{ij}F_{ij}^{2}=\sum_{i\ne v}d_i g_i-(|V|-1)$. Hence
+\[
+ \sum_{i\ne v} d_i(s_i-g_i)
+ \ \ge\ \sum_{i\ne v}\frac1{d_i}\sum_{j\sim i}J_{ij}^{2}-(|V|-1)
+ \ \ge\ 0 .
+\]
+The last inequality is Cauchy--Schwarz using
+$\sum_{j\sim i}J_{ij}=d_i$. Equality would require $J_{ij}=1$ on
+every edge directed out of every $i\ne v$. There is an internal
+edge since the minimum degree is two, and its opposite orientations
+cannot both carry current $1$. Divide by $2m$ to get the strict
+inequality for $v$, and average over $v$ with weights $\pi_v$.
+\end{proof}
+
+\section{The size of the gap}
+\subsection{A uniform upper bound}
+
+We show that the gap is at most $2|V|$ even in the presence of
+degree-two vertices. Fix such a vertex $v$. Its symmetric stochastic
+excursion kernel has diagonal entries $p$ and off-diagonal entries
+$1-p$. We claim that $p\ge 1/4$ on every graph in our irreducible
+domain.
+
+Split $v$ into leaves $A,B$, one per incident edge, with terminal
+values $1,0$, respectively. For internal $i$, let $t_{ij}$ be the
+probability of hitting $A$ before $B$ given departure along $i\to j$,
+and let $q_i$ be its uniform average over $j$. Take $q_A=1$, $q_B=0$. Put
+$b_i=d_i/(d_i-1)$ and $F_{ij}=b_i(q_i-t_{ij})$.
+The first-step equations of the preceding section with the unit
+time cost removed give $F_{ij}=t_{ji}-t_{ij}$ internally and
+$q_i-q_j=R_{ij}F_{ij}$, with
+$R_{ij}=1-1/d_i-1/d_j$ internally and $R_{iA}=R_{iB}=1-1/d_i$
+on terminal edges when present.
+Each internal divergence is zero. If $a$ neighbors $A$, the probability
+of returning to $A$ after departure $A\to a$ is
+$b_aq_a-(b_a-1)=1+F_{aA}=p$.
+The current out of $A$ is therefore $\Gamma=1-p$. Summation by
+parts gives $\sum R_{ij}F_{ij}^2=\Gamma$.
+
+From either terminal follow the degree-two corridor up to its first
+branching vertex $u$. Such a vertex exists because the original
+connected graph is not a cycle. These two corridors share no edges,
+even when their endpoints coincide. Each carries current of magnitude
+$\Gamma$ and has total resistance $1-1/d_u\ge2/3$, by direct addition
+along the corridor. Thus $\Gamma\ge(4/3)\Gamma^2$, proving the claim.
+
+For $d_v=2$ the gap contribution is
+$\operatorname{Var}_a(r_a)/(2p\mu^2)\le 2$, since the two nonnegative
+means $r_a$ average to $\mu$. For $d_v\ge3$, the spectrum of the
+symmetric stochastic kernel is in $[-1,1]$, so that the contribution
+is at most $\operatorname{Var}_a(r_a)/((d_v-2)\mu^2)\le
+(d_v-1)/(d_v-2)\le2$. The middle inequality follows from
+$\sum_a r_a^2\le(\sum_a r_a)^2$. Summing proves the asserted bound.
+
+\subsection{A family with linear gap}
+Let two $k$-cycles share only one vertex $w$, where $k\ge3$. These equal-length bouquets also appear among the examples in \cite[Section~4.4]{breen}. Symmetry gives $\Delta_w=0$. For any other target $v$, its two directions first reach $w$ after $\ell$ and $k-\ell$ steps. At $w$, a walker arriving from the target cycle enters the other cycle with probability $2/3$. Each lap takes $k$ steps and a further lap occurs with probability $1/3$, so the mean delay is $k$. The final exit continues forward with total probability $2/3$ and reverses with probability $1/3$. The conditional return mean for the first direction is therefore
+\[
+ r_\ell=\ell+k+\tfrac23(k-\ell)+\tfrac13\ell,\qquad
+ r_\ell-2k=(2\ell-k)/3 .
+\]
+Here $p=1/3$ and $\mu=2k$. Applying (1) gives $\Delta_v=(2\ell-k)^2/(24k^2)$. Summing over $\ell=1,\dots,k-1$ on each cycle yields
+\[
+                  \Kh-\Kt=\frac{(k-1)(k-2)}{36k}.
+\]
+The graph has $2k-1$ vertices, so the ratio of the gap to its order tends to $1/72$. Thus no sublinear bound holds for all graphs. This settles the growth order asked about in Question~3. The optimal coefficient remains undetermined.
+
+Linear growth also occurs for aperiodic arc chains. Use cycles of lengths $k$ and $k+1$. Their lengths are coprime, so the irreducible arc chain has period one. On the $k$-cycle the mean extra delay at $w$ increases by one and $\mu$ increases by one. Both $p$ and $r_\ell-\mu=(2\ell-k)/3$ stay the same. Summing just on that cycle gives a lower bound $k(k-1)(k-2)/(18(2k+1)^2)$.
+
+\section{A counterexample for a prescribed starting vertex}
+
+Altisen, Devismes, Gerbaud and Lafourcade state that the non-backtracking
+walk has at most the simple-walk mean hitting time for each ordered pair of
+vertices \cite[Corollary~5]{tabu}. Their empty initial tabu list corresponds
+to a uniform first step. The following family uses that convention.
+
+Join cycles of lengths $L,M\geq3$ at a single vertex $w$. On the first cycle
+choose a target $v$ adjacent to $w$, and let $x$ be the other neighbor of $v$.
+Starting at $x$, the two mean first hitting times of $v$ are
+\[
+ H_{\rm SR}(x,v)=L-1+\frac{2M}{L},
+ \qquad
+ H_{\rm NB}(x,v)=\frac{2L-1}{3}+\frac M2.
+\]
+
+For the simple walk, erase trips around the attached cycle that start and
+end at $w$. The resulting walk on the first cycle is simple. Cutting that
+cycle at $v$ gives the interval $[0,L]$ with absorbing endpoints,
+$x=1$, and $w=L-1$. From position $i$ the mean time to absorption is
+$i(L-i)$, as follows by first-step recursion. From $x$ the probability
+of reaching $w$ before $0$ is $1/(L-1)$. After each visit to $w$ the
+probability of absorption before another visit is
+$1/2+1/[2(L-1)]$, by the linear gambler's ruin probabilities.
+Thus the expected number of visits is $2/L$. At each visit the walker
+makes a mean of one attached-cycle excursion before choosing a first-cycle
+edge. Such an excursion has mean length $1+(M-1)=M$, by the same interval
+calculation. This gives the first formula.
+
+For the non-backtracking walk, half the time the first step reaches $v$.
+Otherwise the walk reaches $w$ in $L-2$ steps. There it goes straight to
+$v$ with probability $1/3$, or enters the attached cycle with probability
+$2/3$. Each attached-cycle lap takes exactly $M$ steps. After each lap
+two of the three available edges exit to the first cycle, giving a mean of
+$3/2$ laps conditional on entry. The two exits are equiprobable and leave
+distances $1$ and $L-1$ to $v$. Combining these alternatives gives the
+second formula.
+
+For $L=M=9$ these means are $10$ and $61/6$, respectively. Taking $M=L^2$
+makes their ratio $H_{\rm NB}(x,v)/H_{\rm SR}(x,v)$ grow as $L/6$.
+
+One can pinpoint the issue with backtrack erasure in the proof of \cite[Theorem~4]{tabu}. Even on a single $L$-cycle, start next to $v$ and stop at its first hit. Erasing successive immediate reversals leaves the long route with probability $1/L$, the probability of absorption at the far endpoint of $[0,L]$ from $1$. A new non-backtracking walk chooses that route with probability $1/2$.
+
+\section{A spanning-tree criterion for local uniformity}
+
+The following gives a static test for Question~1. Write $q_i=1/d_i$,
+and assign to each edge $ij$ the target-independent resistance
+$R^0_{ij}=1-q_i-q_j$.
+
+\begin{theorem}
+A connected noncycle graph of minimum degree at least two has locally
+uniform return times if and only if two conditions hold. First, no edge joins two degree-two vertices. Second, for the random spanning tree
+with probability proportional to the product of its edge conductances
+$c_{ij}=1/R^0_{ij}$,
+\[
+     \mathbb P(ij\text{ belongs to the tree})
+        =q_i+q_j-1/m \qquad (ij\in E).
+\]
+In particular, for a connected regular graph of degree at least three,
+local uniformity is equivalent to equiarboreality, meaning that every edge belongs
+to the same number of spanning trees.
+\end{theorem}
+
+\begin{proof}
+For each target $v$ the conditional return mean on departure $v\to j$
+is $1+b_jg_j-(b_j-1)t_{jv}=1+F_{jv}$ in the grounded network above.
+Its incoming currents sum to $2m-d_v$, so uniformity at $v$ means
+that each equals $A_v=2m q_v-1$.
+The target-specific resistances equal $R^0$ augmented by $q_v$ on
+every edge incident to $v$. Equal incoming currents persist when this
+common increment is added or removed. Adjust the potential at $v$ by
+the common increment times the common current with the corresponding
+sign, leaving all currents unchanged. Hence it is equivalent to test
+the network $R^0$ with the same divergence vector
+$\mathbf d-2m e_v$, where $\mathbf d=(d_i)_i$.
+Electrical currents remain unique here. Indeed, two solutions have
+difference of zero total dissipation by summation by parts, and so
+differ only on zero-resistance edges. These edges form a forest,
+since a cycle of degree-two vertices would be an entire component.
+A divergence-free flow on a forest vanishes.
+
+Suppose $ij$ joins two degree-two vertices. Subtract the flows with
+targets $i$ and $j$, orienting the difference to have source $j$ and
+sink $i$. The resulting current is $2m$ along $ji$ and zero elsewhere. This flow satisfies Ohm's law with constant potential and has the
+required divergence. If currents were uniform at both vertices, this
+same edge would carry only $A_i+A_j=2m-2$.
+
+Assume now that all $R^0_{ij}>0$. Let $D$ denote the Moore--Penrose
+inverse of the conductance Laplacian $L$, and put
+$x_i=(D\mathbf d)_i-mD_{ii}$. Let
+$P_{ij}=c_{ij}(D_{ii}+D_{jj}-2D_{ij})$. This is the weighted
+spanning-tree inclusion probability. Applying
+$c_{ij}\partial_{c_{ij}}\log$ to a grounded Laplacian determinant
+counts edge inclusion by the matrix-tree theorem, and gives
+$c_{ij}$ times effective resistance by the determinant derivative.
+The potential $D(\mathbf d-2me_v)$ yields incoming edge current
+\[
+ F^{(v)}_{jv}=mP_{jv}+c_{jv}(x_j-x_v).
+\]
+Adding this identity for the two choices of endpoint as target proves
+necessity of the stated probabilities. Conversely, insert those
+probabilities and set $z_i=x_i+m(q_i-q_i^2)$. The identity
+$R^0_{jv}(q_j-q_v)=(q_j-q_j^2)-(q_v-q_v^2)$ gives
+$F^{(v)}_{jv}-A_v=c_{jv}(z_j-z_v)$.
+Summing over $j\sim v$ gives zero for each $v$, hence $Lz=0$.
+Connectedness makes $z$ constant, proving uniformity.
+In the regular case all tree weights are equal and the required common
+inclusion probability is $(|V|-1)/m$, the average for every spanning
+tree.
+\end{proof}
+
+The examples without edge transitivity include an infinite family.
+Godsil proved that distance-regular graphs are equiarboreal \cite{godsil}.
+The twisted Grassmann graphs of van Dam and Koolen \cite{grassmann}
+form an infinite non-vertex-transitive distance-regular family.
+Their intersection parameters equal those of the corresponding
+Grassmann graphs, in particular they contain triangles. A connected
+edge-transitive graph with two vertex orbits is bipartite, since
+each edge must meet both orbits. Thus these examples have uniform
+returns without edge transitivity.
+
+\begin{thebibliography}{9}\raggedright
+\bibitem{breen}
+J.~Breen, M.~Kempton, A.~Knudson and M.~Shumway.
+On defining Kemeny's constant for non-backtracking random walks.
+\emph{Linear Algebra and its Applications} (2026).
+\href{https://doi.org/10.1016/j.laa.2026.02.034}{doi:10.1016/j.laa.2026.02.034}.
+Numbering in this note follows \href{https://arxiv.org/html/2510.06650v1}{arXiv:2510.06650v1} (2025).
+\bibitem{tabu}
+K.~Altisen, S.~Devismes, A.~Gerbaud and P.~Lafourcade.
+Analysis of random walks using tabu lists.
+\emph{SIROCCO 2012}, 254--266.
+\href{https://doi.org/10.1007/978-3-642-31104-8_22}{doi:10.1007/978-3-642-31104-8\_22}.
+\href{https://www-verimag.imag.fr/PUBLIS/uploads/cizib1712.pdf}{Authors' version}.
+\bibitem{fasino}
+D.~Fasino, A.~Tonetto and F.~Tudisco.
+Hitting times for second-order random walks.
+\emph{European Journal of Applied Mathematics} 34 (2023), 642--666.
+\href{https://doi.org/10.1017/S0956792522000213}{doi:10.1017/S0956792522000213}.
+\bibitem{godsil}
+C.~D.~Godsil. Equiarboreal graphs. \emph{Combinatorica} 1 (1981), 163--167.
+\href{https://doi.org/10.1007/BF02579272}{doi:10.1007/BF02579272}.
+\bibitem{grassmann}
+E.~R.~van Dam and J.~H.~Koolen.
+A new family of distance-regular graphs with unbounded diameter.
+\emph{Inventiones Mathematicae} 162 (2005), 189--193.
+\href{https://doi.org/10.1007/s00222-005-0442-3}{doi:10.1007/s00222-005-0442-3}.
+\end{thebibliography}
+\end{document}
